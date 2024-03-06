@@ -1,0 +1,29 @@
+Code for fine-tuning phase,
+on NTUH dataset
+
+We use the two stage system, a classification model follow by a segmentation model
+Our study bulid a CNN- and Transformer-based system for performance benchmark.
+("EfficientNetV2" and "TinyViT")
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Training stage will build a total of 20 model checkpoints:
+(CNN-based system) EfficientNetV2-UNet classification model(5 fold) & EfficientNetV2-UNet Segmentation model(5 fold)
+(Transformer-based system) TinyViT-UNet classification model(5 fold) & TinyViT-UNet Segmentation model(5 fold)
+
+----------------------------------------------------------------------------------------------------------------------------
+To run the code, follow the steps:
+
+First, in './ntuh_classification/':
+1. copy "pretrained classification weight path (name include auc)" to "_train_config_eff.py" & "_train_config_vit.py" :
+2. run train.sh
+
+Second, in './ntuh_segmentation/':
+1. copy "pretrained segmentation weight path" to "_train_config_eff.py" & "_train_config_vit.py" :
+2. run train.sh
+
+Third, in './get_threshold/':
+1. modeify "get_thresholds_eff.py" & "get_thresholds_vit.py" line 6 to 20:
+    paste "fine-tuned pretrained weight path" in ../ntuh_classification and ../ntuh_segmentation
+2. run get_thresholds.sh
+3. classification and segmentation threshold will show in ./cls_vit_5fold_result/5cv_avg.json  ./cls_eff_5fold_result/5cv_avg.json

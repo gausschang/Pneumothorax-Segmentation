@@ -1,0 +1,27 @@
+Code for testing phase,
+on NTUH testing dataset
+
+We use the two stage design, a classification model (pneumothorax vs any other conditions) follow by a segmentation model for lesion segmentation (pneumothorax regions)
+Our study bulid a CNN- and Transformer-based system for performance benchmark.
+("EfficientNetV2" and "TinyViT")
+
+----------------------------------------------------------------------------------------------------------------------------
+
+To run the code, follow the steps:
+
+First, in './testing/':
+1. modified "inference_cnn.py" & "inference_vit.py" lines 7-21:
+2. replace varlables:
+    "youden": classification threshold from ../step2_ntuh_training/get_thres
+    "seg_threshold": segmentation threshold from ../step2_ntuh_training/get_thres
+    "cls_weights": 5 fold checkpoints from ../step2_ntuh_training/ntuh_classification
+    "seg_weights": 5 fold checkpoints from ../step2_ntuh_training/ntuh_segemntation
+3. run inference.sh
+4. the classification & segemntation testing result (CNN&ViT) will save in ./testing/
+
+Second, in './testing/':
+1. run bootstrap.py
+2. the classification & segemntation performance metric (CNN&ViT) will show on terminal
+
+
+Third, thanks for your hard work, I own you a dinner!
